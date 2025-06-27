@@ -36,8 +36,8 @@ export default async function Page({
               {it.still_path != null && (
                 <Image
                   src={`https://image.tmdb.org/t/p/original/${it.still_path}`}
-                  width={92}
-                  height={138}
+                  width={96}
+                  height={54}
                   alt="poster"
                 />
               )}
