@@ -1,1 +1,31 @@
 @import "tailwindcss";
+
+@layer utilities {
+  .scrollbar-hide {
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .scrollbar-hide-x {
+    scrollbar-width: none;
+    overflow-x: auto;
+    overflow-y: visible;
+
+    &::-webkit-scrollbar:horizontal {
+      display: none;
+    }
+  }
+
+  .scrollbar-hide-y {
+    scrollbar-width: none;
+    overflow-y: auto;
+    overflow-x: visible;
+
+    &::-webkit-scrollbar:vertical {
+      display: none;
+    }
+  }
+}

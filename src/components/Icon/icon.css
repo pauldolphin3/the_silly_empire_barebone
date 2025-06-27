@@ -1,0 +1,23 @@
+.icon-lightbulb::before {
+  content: "\f0eb";
+}
+
+.icon-xmark-large::before {
+  content: "\e59b";
+}
+
+.icon-magnifying-glass::before {
+  content: "\f002";
+}
+
+.icon-circle-info::before {
+  content: "\f05a";
+}
+
+.icon-chevron-left::before {
+  content: "\f053";
+}
+
+.icon-chevron-right::before {
+  content: "\f054";
+}
