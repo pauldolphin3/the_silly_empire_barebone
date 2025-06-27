@@ -90,7 +90,7 @@ export default async function Page({
                 alt="poster"
               />
             )}
-            <p>
+            <p className="line-clamp-1">
               <Icon name="arrow-left" />
               <span>{` ${prevEpisode.name} S${prevEpisode.season_number} E${prevEpisode.episode_number}`}</span>
             </p>
@@ -112,7 +112,7 @@ export default async function Page({
                 alt="poster"
               />
             )}
-            <p>
+            <p className="line-clamp-1">
               <span>{`${nextEpisode.name} S${nextEpisode.season_number} E${nextEpisode.episode_number} `}</span>
               <Icon name="arrow-right" />
             </p>
