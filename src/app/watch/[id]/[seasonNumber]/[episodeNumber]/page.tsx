@@ -30,15 +30,18 @@ export default async function Page({
   }
 
   return (
-    <Player
-      playlist={playlist}
-      title={{
-        id: id,
-        name: title.name,
-        imagePath: episode.still_path === null ? undefined : episode.still_path,
-        episodeNumber: Number(episodeNumber),
-        seasonNumber: Number(seasonNumber),
-      }}
-    />
+    <div>
+      <Player
+        playlist={playlist}
+        title={{
+          id: id,
+          name: title.name,
+          imagePath:
+            episode.still_path === null ? undefined : episode.still_path,
+          episodeNumber: Number(episodeNumber),
+          seasonNumber: Number(seasonNumber),
+        }}
+      />
+    </div>
   );
 }

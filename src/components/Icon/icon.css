@@ -21,3 +21,11 @@
 .icon-chevron-right::before {
   content: "\f054";
 }
+
+.icon-arrow-left::before {
+  content: "\f060";
+}
+
+.icon-arrow-right::before {
+  content: "\f061";
+}

@@ -108,12 +108,12 @@ export default function ContinueWatching() {
                 {it.imagePath !== undefined && (
                   <Image
                     src={`https://image.tmdb.org/t/p/original/${it.imagePath}`}
-                    width={92}
-                    height={138}
+                    width={96}
+                    height={54}
                     alt="poster"
                   />
                 )}
-                <p>{`${it.name} S${it.seasonNumber}E${it.episodeNumber}`}</p>
+                <p>{`${it.name} S${it.seasonNumber} E${it.episodeNumber}`}</p>
               </Link>
               <span className="w-full h-1 rounded bg-gray-500">
                 <span

@@ -55,7 +55,7 @@ export default function Player({
       className="mt-4 w-full aspect-auto"
       title={
         title.seasonNumber !== undefined
-          ? `${title.name} S${title.seasonNumber}E${title.episodeNumber}`
+          ? `${title.name} S${title.seasonNumber} E${title.episodeNumber}`
           : title.name
       }
       src={{ src: playlist, type: "application/vnd.apple.mpegurl" }}

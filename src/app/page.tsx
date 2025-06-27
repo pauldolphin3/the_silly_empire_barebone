@@ -139,8 +139,8 @@ export default async function Home({
                 {it.poster_path != null && (
                   <Image
                     src={`https://image.tmdb.org/t/p/original/${it.poster_path}`}
-                    width={92}
-                    height={138}
+                    width={it.media_type == "movie" ? 92 : 96}
+                    height={it.media_type == "movie" ? 138 : 54}
                     alt="poster"
                   />
                 )}
