@@ -1,3 +1,4 @@
+import Icon from "@/components/Icon";
 import Player from "@/components/Player";
 import tmdb from "@/libs/tmdb";
 import { vixsrcPlaylist } from "@/libs/vixsrc";
@@ -18,8 +19,13 @@ export default async function Page({
 
   const playlist = data[1];
   if (playlist == false) {
-    throw new Error(
-      "Movie not available to watch yet (or something unbelievable happened)"
+    return (
+      <p className="text-red-600 block text-xs pt-8">
+        <Icon name="xmark-large" /> Error:{" "}
+        {
+          "Movie not available to watch yet (or something unbelievable happened)"
+        }
+      </p>
     );
   }
 

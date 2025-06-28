@@ -1,5 +1,6 @@
 import Icon from "@/components/Icon";
 import tmdb from "@/libs/tmdb";
+import { vixsrcPlaylist } from "@/libs/vixsrc";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -17,7 +18,11 @@ export default async function Page({
       seasonNumber: Number(seasonNumber),
       episodeNumber: Number(episodeNumber),
     }),
+    vixsrcPlaylist(Number(id), Number(seasonNumber), Number(episodeNumber)),
   ]);
+
+  const playlist = data[2];
+  if (playlist == false) return;
 
   const title = data[0];
   const episode = data[1];

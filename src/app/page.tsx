@@ -35,7 +35,12 @@ export default async function Home({
     if ("page" in filters) {
       const value = Number(filters.page);
       if (Number.isNaN(value) || value < 1) {
-        throw new Error("page filter must be a valid number > 1");
+        return (
+          <p className="text-red-600 block text-xs pt-8">
+            <Icon name="xmark-large" /> Error:{" "}
+            {"page filter must be a valid number > 1"}
+          </p>
+        );
       }
       page = value;
     }
@@ -65,7 +70,12 @@ export default async function Home({
           return it as MovieWithMediaType;
         });
       } else {
-        throw new Error('type filter can only be "tv" or "movie"');
+        return (
+          <p className="text-red-600 block text-xs pt-8">
+            <Icon name="xmark-large" /> Error:{" "}
+            {'type filter can only be "tv" or "movie"'}
+          </p>
+        );
       }
     } else {
       items = (
@@ -83,7 +93,12 @@ export default async function Home({
     if ("max" in filters) {
       const value = Number(filters.max);
       if (Number.isNaN(value)) {
-        throw new Error("max filter must be a valid number");
+        return (
+          <p className="text-red-600 block text-xs pt-8">
+            <Icon name="xmark-large" /> Error:{" "}
+            {"max filter must be a valid number"}
+          </p>
+        );
       }
       maxResults = value;
     }
