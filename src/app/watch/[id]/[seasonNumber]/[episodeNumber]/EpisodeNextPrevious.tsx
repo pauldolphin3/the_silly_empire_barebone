@@ -1,34 +1,36 @@
 import Icon from "@/components/Icon";
 import tmdb from "@/libs/tmdb";
-import { vixsrcPlaylist } from "@/libs/vixsrc";
 import Image from "next/image";
 import Link from "next/link";
+import {
+  AppendToResponse,
+  AppendToResponseTvEpisodeKey,
+  AppendToResponseTvKey,
+  Episode,
+  TvShowDetails,
+} from "tmdb-ts";
 
-export default async function Page({
-  params,
+export default async function EpisodeNextPrevious({
+  title,
+  episode,
+  id,
+  seasonNumber,
 }: {
-  params: Promise<{ id: string; seasonNumber: string; episodeNumber: string }>;
+  title: AppendToResponse<
+    TvShowDetails,
+    AppendToResponseTvKey[] | undefined,
+    "tvShow"
+  >;
+  episode: AppendToResponse<
+    Omit<Episode, "show_id">,
+    AppendToResponseTvEpisodeKey[] | undefined,
+    "tvEpisode"
+  >;
+  id: number;
+  seasonNumber: number;
 }) {
-  const { id, seasonNumber, episodeNumber } = await params;
-
-  const data = await Promise.all([
-    tmdb.tvShows.details(Number(id)),
-    tmdb.tvEpisode.details({
-      tvShowID: Number(id),
-      seasonNumber: Number(seasonNumber),
-      episodeNumber: Number(episodeNumber),
-    }),
-    vixsrcPlaylist(Number(id), Number(seasonNumber), Number(episodeNumber)),
-  ]);
-
-  const playlist = data[2];
-  if (playlist == false) return;
-
-  const title = data[0];
-  const episode = data[1];
-
   const currentSeasonIndex = title.seasons.findIndex(
-    (season) => season.season_number === Number(seasonNumber)
+    (season) => season.season_number === seasonNumber
   )!;
 
   let prevEpisodeSeason: number | undefined;
@@ -62,14 +64,14 @@ export default async function Page({
   const data2 = await Promise.all([
     prevEpisodeNumber !== undefined
       ? tmdb.tvEpisode.details({
-          tvShowID: Number(id),
+          tvShowID: id,
           seasonNumber: prevEpisodeSeason!,
           episodeNumber: prevEpisodeNumber,
         })
       : undefined,
     nextEpisodeNumber !== undefined
       ? tmdb.tvEpisode.details({
-          tvShowID: Number(id),
+          tvShowID: id,
           seasonNumber: nextEpisodeSeason!,
           episodeNumber: nextEpisodeNumber,
         })

@@ -1,7 +1,9 @@
+import EpisodeNextPrevious from "@/app/watch/[id]/[seasonNumber]/[episodeNumber]/EpisodeNextPrevious";
 import Icon from "@/components/Icon";
 import Player from "@/components/Player";
 import tmdb from "@/libs/tmdb";
 import { vixsrcPlaylist } from "@/libs/vixsrc";
+import { Suspense } from "react";
 
 export default async function Page({
   params,
@@ -46,6 +48,15 @@ export default async function Page({
           seasonNumber: Number(seasonNumber),
         }}
       />
+
+      <Suspense>
+        <EpisodeNextPrevious
+          title={title}
+          episode={episode}
+          id={Number(id)}
+          seasonNumber={Number(seasonNumber)}
+        />
+      </Suspense>
     </div>
   );
 }
