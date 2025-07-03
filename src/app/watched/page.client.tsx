@@ -2,6 +2,7 @@
 
 import ExportWatched from "@/components/ExportWatched";
 import Icon from "@/components/Icon";
+import ImportWatched from "@/components/ImportWatched";
 import { db } from "@/libs/db";
 import groupBy from "@/libs/groupBy";
 import jaroWinkler from "@/libs/jaroWinkler";
@@ -52,6 +53,7 @@ export default function PageClient({
         </p>
 
         <ExportWatched />
+        <ImportWatched />
       </div>
 
       <Form action={"/watched"} className="w-full group">

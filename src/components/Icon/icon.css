@@ -41,3 +41,7 @@
 .icon-floppy-disk::before {
   content: "\f0c7";
 }
+
+.icon-up-to-bracket::before {
+  content: "\e66e";
+}
