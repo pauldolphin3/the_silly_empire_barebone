@@ -9,7 +9,6 @@ import { useLiveQuery } from "dexie-react-hooks";
 import Form from "next/form";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useRef } from "react";
 
 export default function PageClient({
   originalQuery,
@@ -37,56 +36,6 @@ export default function PageClient({
       total,
     };
   }, [query]);
-  const ref = useRef<HTMLDivElement>(null);
-  const scroll = useCallback(
-    (direction: "left" | "right") => {
-      const container = ref.current!;
-
-      const x0 = 0;
-      const x1 = container.clientWidth;
-
-      function intersect(child: HTMLDivElement, parent: HTMLDivElement) {
-        const x2 = child.offsetLeft - parent.scrollLeft;
-        const x3 = x2 + child.clientWidth;
-
-        const x4 = Math.max(Math.max(x0, x2), x0);
-        const x5 = Math.min(x1, x3);
-        const w = Math.max(x5 - x4, 0);
-
-        return w;
-      }
-
-      let scrollAmount = 0;
-      if (direction === "right") {
-        for (let i = container.children.length - 1; i >= 0; --i) {
-          const w = intersect(
-            container.children.item(i) as HTMLDivElement,
-            container
-          );
-          if (w > 0) {
-            scrollAmount = x1 - w;
-            break;
-          }
-        }
-      } else {
-        for (let i = 0; i < container.children.length; ++i) {
-          const w = intersect(
-            container.children.item(i) as HTMLDivElement,
-            container
-          );
-          if (w > 0) {
-            scrollAmount = (x1 - w) * -1;
-            break;
-          }
-        }
-      }
-
-      if (scrollAmount !== 0) {
-        container.scrollBy({ left: scrollAmount, behavior: "smooth" });
-      }
-    },
-    [ref]
-  );
 
   return (
     <div className="space-y-8 pt-8">
