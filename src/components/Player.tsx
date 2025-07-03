@@ -23,6 +23,7 @@ export default function Player({
     id: string;
     seasonNumber?: number;
     episodeNumber?: number;
+    episodeName?: string;
     name: string;
     imagePath?: string;
   };
@@ -55,7 +56,7 @@ export default function Player({
       className="w-full aspect-auto"
       title={
         title.seasonNumber !== undefined
-          ? `${title.name} S${title.seasonNumber} E${title.episodeNumber}`
+          ? `${title.episodeName} - S${title.seasonNumber} E${title.episodeNumber}`
           : title.name
       }
       src={{ src: playlist, type: "application/vnd.apple.mpegurl" }}

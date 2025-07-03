@@ -52,6 +52,7 @@ export default async function Page({
             episode.still_path === null ? undefined : episode.still_path,
           episodeNumber: Number(episodeNumber),
           seasonNumber: Number(seasonNumber),
+          episodeName: episode.name,
         }}
       />
     </div>
