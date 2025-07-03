@@ -64,7 +64,7 @@ export default function Player({
           if (url.endsWith("storage/enc.key")) {
             url = "https://vixsrc.to/storage/enc.key";
           }
-          xhr.open("GET", `/proxy/${encodeURIComponent(url)}`);
+          xhr.open("GET", `/proxy/${encodeURIComponent(url)}`, true);
         };
       }}
       onHlsError={(data) => {
