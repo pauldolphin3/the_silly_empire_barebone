@@ -1,3 +1,4 @@
+import MarkAsWatched from "@/components/MarkAsWatched";
 import tmdb from "@/libs/tmdb";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,10 +13,21 @@ export default async function Page({
   const series = await tmdb.tvShows.details(Number(id));
 
   return (
-    <div className="pt-8 flex flex-col">
-      <p className="text-lg font-bold">{series.name}</p>
+    <div className="pt-8 flex flex-col gap-6">
+      <div className="flex gap-4">
+        <p className="text-lg font-bold">{series.name}</p>
+        <MarkAsWatched
+          id={series.id.toString()}
+          name={series.name}
+          type="tv"
+          imagePath={
+            series.poster_path === null ? undefined : series.poster_path
+          }
+          releaseDate={new Date(series.first_air_date + "T00:00:00.000Z")}
+        />
+      </div>
 
-      <div>
+      <div className="flex flex-col gap-6">
         {/* {items.length <= 0 && query.trim().length > 0 && (
           <span className="text-gray-600 block text-xs p-1">
             <Icon name="magnifying-glass" /> No results found - try different
@@ -30,7 +42,7 @@ export default async function Page({
               <Link
                 key={`${id}-${it.id}`}
                 href={hasEpisodes ? `/tv/${id}/${it.season_number}` : ""}
-                className="hover:opacity-50 p-1 data-[disabled=true]:opacity-50"
+                className="hover:opacity-50 data-[disabled=true]:opacity-50"
                 data-disabled={!hasEpisodes}
               >
                 {it.poster_path != null && (

@@ -1,8 +1,8 @@
+import Icon from "@/components/Icon";
 import type { Metadata, Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
-import Icon from "@/components/Icon";
 
 export const viewport: Viewport = {
   themeColor: "#171717",
@@ -286,6 +286,10 @@ export default function RootLayout({
               <span>The Silly Empire </span>
               <span className="text-xs opacity-60">barebone™</span>
             </span>
+          </Link>
+
+          <Link href={"/watched"} className="hover:opacity-50 mr-4">
+            <Icon name="list" />
           </Link>
 
           <Link href={"/credits"} className="hover:opacity-50">

@@ -29,3 +29,15 @@
 .icon-arrow-right::before {
   content: "\f061";
 }
+
+.icon-list::before {
+  content: "\f03a";
+}
+
+.icon-check::before {
+  content: "\f00c";
+}
+
+.icon-floppy-disk::before {
+  content: "\f0c7";
+}

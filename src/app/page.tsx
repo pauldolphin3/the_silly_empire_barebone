@@ -109,6 +109,7 @@ export default async function Home({
     <div className="space-y-8 pt-8">
       <ContinueWatching />
 
+      <p className="text-lg font-bold">Search</p>
       <div className="space-y-4">
         <Form action={"/"} className="w-full group">
           <input
@@ -146,16 +147,14 @@ export default async function Home({
             items.map((it) => (
               <Link
                 key={it.id}
-                href={
-                  it.media_type == "movie" ? `/watch/${it.id}` : `/tv/${it.id}`
-                }
+                href={`/${it.media_type}/${it.id}`}
                 className="hover:opacity-50"
               >
                 {it.poster_path != null && (
                   <Image
                     src={`https://image.tmdb.org/t/p/original/${it.poster_path}`}
-                    width={it.media_type == "movie" ? 92 : 96}
-                    height={it.media_type == "movie" ? 138 : 54}
+                    width={92}
+                    height={138}
                     alt="poster"
                   />
                 )}

@@ -63,75 +63,79 @@ export default function ContinueWatching() {
   );
   if (items === undefined || items.length <= 0) return;
   return (
-    <div className="relative group">
-      <button
-        onClick={() => scroll("left")}
-        className="absolute left-0 z-5 bg-black/50 w-10 top-0 h-full group-hover:opacity-100 opacity-0"
-      >
-        <Icon name="chevron-left" />
-      </button>
+    <div className="space-y-4">
+      <p className="text-lg font-bold">Continue Watching</p>
 
-      <div
-        ref={ref}
-        className="flex flex-row items-end gap-4 overflow-x-scroll scrollbar-hide"
-      >
-        {items.map((it) =>
-          it.seasonNumber === undefined ? (
-            <div className="flex flex-col shrink-0" key={it.id}>
-              <Link href={`/watch/${it.id}`} className="hover:opacity-50 p-1">
-                {it.imagePath !== undefined && (
-                  <Image
-                    src={`https://image.tmdb.org/t/p/original/${it.imagePath}`}
-                    width={92}
-                    height={138}
-                    alt="poster"
-                  />
-                )}
-                <p>{it.name}</p>
-              </Link>
-              <span className="w-full h-1 rounded bg-gray-500">
-                <span
-                  className="h-1 block rounded bg-red-500"
-                  style={{ width: `${it.progressPercent * 100}%` }}
-                ></span>
-              </span>
-            </div>
-          ) : (
-            <div
-              className="flex flex-col shrink-0"
-              key={`${it.id}-${it.seasonNumber}-${it.episodeNumber}`}
-            >
-              <Link
-                href={`/watch/${it.id}/${it.seasonNumber}/${it.episodeNumber}`}
-                className="hover:opacity-50 p-1"
+      <div className="relative group">
+        <button
+          onClick={() => scroll("left")}
+          className="absolute left-0 z-5 bg-black/50 w-10 top-0 h-full group-hover:opacity-100 opacity-0"
+        >
+          <Icon name="chevron-left" />
+        </button>
+
+        <div
+          ref={ref}
+          className="flex flex-row items-end gap-4 overflow-x-scroll scrollbar-hide"
+        >
+          {items.map((it) =>
+            it.seasonNumber === undefined ? (
+              <div className="flex flex-col shrink-0" key={it.id}>
+                <Link href={`/watch/${it.id}`} className="hover:opacity-50 p-1">
+                  {it.imagePath !== undefined && (
+                    <Image
+                      src={`https://image.tmdb.org/t/p/original/${it.imagePath}`}
+                      width={92}
+                      height={138}
+                      alt="poster"
+                    />
+                  )}
+                  <p>{it.name}</p>
+                </Link>
+                <span className="w-full h-1 rounded bg-gray-500">
+                  <span
+                    className="h-1 block rounded bg-red-500"
+                    style={{ width: `${it.progressPercent * 100}%` }}
+                  ></span>
+                </span>
+              </div>
+            ) : (
+              <div
+                className="flex flex-col shrink-0"
+                key={`${it.id}-${it.seasonNumber}-${it.episodeNumber}`}
               >
-                {it.imagePath !== undefined && (
-                  <Image
-                    src={`https://image.tmdb.org/t/p/original/${it.imagePath}`}
-                    width={96}
-                    height={54}
-                    alt="poster"
-                  />
-                )}
-                <p>{`${it.name} S${it.seasonNumber} E${it.episodeNumber}`}</p>
-              </Link>
-              <span className="w-full h-1 rounded bg-gray-500">
-                <span
-                  className="h-1 block rounded bg-red-500"
-                  style={{ width: `${it.progressPercent * 100}%` }}
-                ></span>
-              </span>
-            </div>
-          )
-        )}
-      </div>
+                <Link
+                  href={`/watch/${it.id}/${it.seasonNumber}/${it.episodeNumber}`}
+                  className="hover:opacity-50 p-1"
+                >
+                  {it.imagePath !== undefined && (
+                    <Image
+                      src={`https://image.tmdb.org/t/p/original/${it.imagePath}`}
+                      width={96}
+                      height={54}
+                      alt="poster"
+                    />
+                  )}
+                  <p>{`${it.name} S${it.seasonNumber} E${it.episodeNumber}`}</p>
+                </Link>
+                <span className="w-full h-1 rounded bg-gray-500">
+                  <span
+                    className="h-1 block rounded bg-red-500"
+                    style={{ width: `${it.progressPercent * 100}%` }}
+                  ></span>
+                </span>
+              </div>
+            )
+          )}
+        </div>
 
-      <button
-        onClick={() => scroll("right")}
-        className="absolute right-0 z-5 bg-black/50 w-10 top-0 h-full group-hover:opacity-100 opacity-0"
-      >
-        <Icon name="chevron-right" />
-      </button>
+        <button
+          onClick={() => scroll("right")}
+          className="absolute right-0 z-5 bg-black/50 w-10 top-0 h-full group-hover:opacity-100 opacity-0"
+        >
+          <Icon name="chevron-right" />
+        </button>
+      </div>
     </div>
   );
 }

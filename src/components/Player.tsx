@@ -52,7 +52,7 @@ export default function Player({
   return (
     <MediaPlayer
       ref={ref}
-      className="mt-4 w-full aspect-auto"
+      className="w-full aspect-auto"
       title={
         title.seasonNumber !== undefined
           ? `${title.name} S${title.seasonNumber} E${title.episodeNumber}`

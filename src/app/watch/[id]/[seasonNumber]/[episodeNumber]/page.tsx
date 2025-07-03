@@ -2,6 +2,7 @@ import Icon from "@/components/Icon";
 import Player from "@/components/Player";
 import tmdb from "@/libs/tmdb";
 import { vixsrcPlaylist } from "@/libs/vixsrc";
+import Link from "next/link";
 
 export default async function Page({
   params,
@@ -34,7 +35,14 @@ export default async function Page({
   }
 
   return (
-    <div>
+    <div className="flex flex-col">
+      <Link href={`/tv/${id}`} className="hover:opacity-50 pb-3">
+        <p className="line-clamp-1">
+          <Icon name="arrow-left" />
+          <span> {title.name}</span>
+        </p>
+      </Link>
+
       <Player
         playlist={playlist}
         title={{
