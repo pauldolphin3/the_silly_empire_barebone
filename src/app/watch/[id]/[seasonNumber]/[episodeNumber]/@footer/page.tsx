@@ -87,7 +87,7 @@ export default async function Page({
             href={`/watch/${id}/${prevEpisode.season_number}/${prevEpisode.episode_number}`}
             className="hover:opacity-50 p-1 flex flex-col items-start h-full justify-end"
           >
-            {prevEpisode.still_path !== undefined && (
+            {prevEpisode.still_path !== null && (
               <Image
                 src={`https://image.tmdb.org/t/p/original/${prevEpisode.still_path}`}
                 width={96}
@@ -109,7 +109,7 @@ export default async function Page({
             href={`/watch/${id}/${nextEpisode.season_number}/${nextEpisode.episode_number}`}
             className="hover:opacity-50 p-1 flex flex-col items-end h-full justify-end"
           >
-            {nextEpisode.still_path !== undefined && (
+            {nextEpisode.still_path !== null && (
               <Image
                 src={`https://image.tmdb.org/t/p/original/${nextEpisode.still_path}`}
                 width={96}
