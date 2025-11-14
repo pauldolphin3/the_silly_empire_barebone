@@ -1,5 +1,5 @@
 import Icon from "@/components/Icon";
-import tmdb from "@/libs/tmdb";
+import tmdb, { tmdbCatchResourceNotFoundError } from "@/libs/tmdb";
 import { vixsrcPlaylist } from "@/libs/vixsrc";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,19 +13,24 @@ export default async function Page({
 
   const data = await Promise.all([
     tmdb.tvShows.details(Number(id)),
-    tmdb.tvEpisode.details({
-      tvShowID: Number(id),
-      seasonNumber: Number(seasonNumber),
-      episodeNumber: Number(episodeNumber),
-    }),
+    tmdbCatchResourceNotFoundError(
+      // Take a look at this function call in outer page.tsx.
+      tmdb.tvEpisode.details({
+        tvShowID: Number(id),
+        seasonNumber: Number(seasonNumber),
+        episodeNumber: Number(episodeNumber),
+      })
+    ),
     vixsrcPlaylist(Number(id), Number(seasonNumber), Number(episodeNumber)),
   ]);
 
   const playlist = data[2];
   if (playlist == false) return;
 
-  const title = data[0];
   const episode = data[1];
+  if (episode === undefined) return;
+
+  const title = data[0];
 
   const currentSeasonIndex = title.seasons.findIndex(
     (season) => season.season_number === Number(seasonNumber)

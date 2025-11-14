@@ -1,6 +1,6 @@
 import Icon from "@/components/Icon";
 import Player from "@/components/Player";
-import tmdb from "@/libs/tmdb";
+import tmdb, { tmdbCatchResourceNotFoundError } from "@/libs/tmdb";
 import { vixsrcPlaylist } from "@/libs/vixsrc";
 
 export default async function Page({
@@ -12,16 +12,16 @@ export default async function Page({
 
   const data = await Promise.all([
     tmdb.tvShows.details(Number(id)),
-    tmdb.tvEpisode.details({
-      tvShowID: Number(id),
-      seasonNumber: Number(seasonNumber),
-      episodeNumber: Number(episodeNumber),
-    }),
+    tmdbCatchResourceNotFoundError(
+      // Sometimes, happens that, for example, 5 seasons of a tv series are organized as 3 seasons with also less episodes but that last more in tmdb, with respect to vixsrc.
+      tmdb.tvEpisode.details({
+        tvShowID: Number(id),
+        seasonNumber: Number(seasonNumber),
+        episodeNumber: Number(episodeNumber),
+      })
+    ),
     vixsrcPlaylist(Number(id), Number(seasonNumber), Number(episodeNumber)),
   ]);
-
-  const title = data[0];
-  const episode = data[1];
 
   const playlist = data[2];
   if (playlist == false) {
@@ -33,6 +33,9 @@ export default async function Page({
     );
   }
 
+  const title = data[0];
+  const episode = data[1];
+
   return (
     <div>
       <Player
@@ -40,11 +43,13 @@ export default async function Page({
         title={{
           id: id,
           name: title.name,
-          imagePath:
-            episode.still_path === null ? undefined : episode.still_path,
           episodeNumber: Number(episodeNumber),
           seasonNumber: Number(seasonNumber),
-          episodeName: episode.name,
+          imagePath:
+            episode === undefined || episode.still_path === null
+              ? undefined
+              : episode.still_path,
+          episodeName: episode?.name,
         }}
       />
     </div>
