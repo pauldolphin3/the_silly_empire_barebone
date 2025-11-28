@@ -43,7 +43,8 @@ export default async function Page({
     prevEpisodeSeason = episode.season_number;
   } else {
     const prevSeason = title.seasons[currentSeasonIndex - 1];
-    if (prevSeason !== undefined) {
+    if (prevSeason !== undefined && prevSeason.episode_count > 0) {
+      //                            ^ Just to be sure (see below same check).
       prevEpisodeNumber = prevSeason.episode_count;
       prevEpisodeSeason = prevSeason.season_number;
     }
@@ -58,7 +59,8 @@ export default async function Page({
     nextEpisodeSeason = episode.season_number;
   } else {
     const nextSeason = title.seasons[currentSeasonIndex + 1];
-    if (nextSeason !== undefined) {
+    if (nextSeason !== undefined && nextSeason.episode_count > 0) {
+      //                            ^ Sometimes, it happens TMDB puts seasons (I guess expected ones), without episodes for the time being.
       nextEpisodeNumber = 1;
       nextEpisodeSeason = nextSeason.season_number;
     }
